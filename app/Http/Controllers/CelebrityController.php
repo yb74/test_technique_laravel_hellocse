@@ -79,9 +79,9 @@ class CelebrityController extends Controller
 
         $celebrity->save();
 
-        // return response()->json([
-        //     'pathFile' => $pathFile,
-        // ]);
+        return response()->json([
+            'pathFile' => $pathFile,
+        ]);
     }
 
     /**
@@ -113,9 +113,9 @@ class CelebrityController extends Controller
 
         $celebrity->save();
 
-        // return response()->json([
-        //     'pathFile' => $pathFile
-        // ]);
+        return response()->json([
+            'pathFile' => $pathFile
+        ]);
     }
 
      /**
