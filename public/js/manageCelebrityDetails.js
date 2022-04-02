@@ -162,6 +162,7 @@ const deleteClickedCelebrity = (id) => { // Function that handle through ajax th
         },
         success: response => {
             $("#"+id).closest('.celebrity-h3').remove();
+            $("#celebrity_text_and_picture_container").remove();
             manageDeleteMessage();
         },
         error : (request,error) => {

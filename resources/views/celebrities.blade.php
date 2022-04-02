@@ -124,7 +124,7 @@
                 <div id="celebrity_details_card" class="celebrity_details_card col-md-8 p-3" style="background-color:cornflowerblue">
 
                     @if(isset($celebrityInfo))
-                        <div class="w-100 p-3">
+                        <div id="celebrity_text_and_picture_container" class="w-100 p-3">
                             <img src="{{ asset('storage/upload/'.$celebrityInfo['image']) }}" class="float-start img-border-radius img-thumbnail w-50 m-3" alt="Celebrity photo" title="Celebrity photo">
                             <p class="fw-bold">{{$celebrityInfo['firstname']}} {{$celebrityInfo['lastname']}}</p>
                             <p class="text-start">{{$celebrityInfo['description']}}</p>
