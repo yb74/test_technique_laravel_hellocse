@@ -44,7 +44,21 @@ composer install
 npm install
 ```
 
-* Configure your .env file (see doc : https://laravel.com/docs/9.x/configuration#environment-configuration)
+* Configure your .env file to set the connection to the database... (see doc : https://laravel.com/docs/9.x/configuration#environment-configuration)
+* You can generate faker dummy data to be sent to the database by running this command :
+
+```
+php artisan tinker
+php code => Celebrity::factory()->count(10)->create();
+```
+
+note : documentation of Faker : https://fakerphp.github.io/formatters/text-and-paragraphs/
+
+* Run the following command to migrate your data to the database :
+
+```
+php artisan migrate
+```
 
 ## Help
 
