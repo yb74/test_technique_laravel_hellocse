@@ -60,6 +60,12 @@ note : documentation of Faker : https://fakerphp.github.io/formatters/text-and-p
 php artisan migrate
 ```
 
+* Now you can run this command to launch your app :
+
+```
+php artisan serve
+```
+
 ## Help
 
 If you have an error of composer, npm or php version, make sure to update them.
