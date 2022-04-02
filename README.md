@@ -49,7 +49,7 @@ npm install
 
 ```
 php artisan tinker
-php code => Celebrity::factory()->count(10)->create();
+Celebrity::factory()->count(10)->create();
 ```
 
 note : documentation of Faker : https://fakerphp.github.io/formatters/text-and-paragraphs/
