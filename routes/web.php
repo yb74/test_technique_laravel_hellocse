@@ -15,19 +15,17 @@ use App\Http\Controllers\CelebrityController;
 |
 */
 
-Route::get('/', function () {
+Route::get('/', function () { // Displays homepage
     return view('welcome');
 });
 
-Route::get('/celebrities', [CelebrityController::class, 'index']);
-Route::post('/celebrities/{id}', [CelebrityController::class, 'showDetails']);
+Route::get('/celebrities', [CelebrityController::class, 'index']); // Displays celebrities list
+Route::post('/celebrities/{id}', [CelebrityController::class, 'showDetails']); // send the id of a specific celebrity to the backend (ajax request)
 
-Route::post('/celebrities', [CelebrityController::class, 'createCelebritySheet']);
+Route::post('/celebrities', [CelebrityController::class, 'createCelebritySheet']); // create a celebrity sheet
 
-Route::post('/celebrities/update/{id}', [CelebrityController::class, 'updateCelebritySheet']);
+Route::post('/celebrities/update/{id}', [CelebrityController::class, 'updateCelebritySheet']); // update a celebrity sheet
 
-Route::delete('/celebrities/delete/{id}', [CelebrityController::class, 'delete']);
+Route::delete('/celebrities/delete/{id}', [CelebrityController::class, 'delete']); // delete a celebrity sheet
 
-Route::get('/celebrity/{id}', [CelebrityController::class, 'show'])->name('celebrities.show');
-
-Route::get('image/{filename}', [CelebrityController::class, 'show'])->name('image.displayImage');
+Route::get('/celebrity/{id}', [CelebrityController::class, 'show'])->name('celebrities.show'); // show the details of a specific celebrity

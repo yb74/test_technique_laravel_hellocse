@@ -6,6 +6,10 @@
     <div class="container py-3 text-center" id="displayDetails">
         <h1 class="fw-bolder">Celebrity News</h1>
 
+<!-- notification delete message -->
+    <span class="js-delete-msg"></span>
+<!-- End of notification delete message -->
+
 <!-- Button trigger create cemlebrity modal -->
         <div>
             <button type="button" class="btn btn-success my-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
@@ -79,7 +83,7 @@
                                         <div class="modal-dialog modal-fullscreen-md-down">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel2">Create a celebrity sheet</h5>
+                                                    <h5 class="modal-title" id="exampleModalLabel2">Modify a celebrity sheet</h5>
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
@@ -121,10 +125,9 @@
 
                     @if(isset($celebrityInfo))
                         <div class="w-100 p-3">
-                            <img src="{{ asset('storage/upload/'.$celebrityInfo['image']) }}" class="float-start img-border-radius img-thumbnail w-50" alt="Celebrity photo" title="Celebrity photo">
-                            <br><br>
+                            <img src="{{ asset('storage/upload/'.$celebrityInfo['image']) }}" class="float-start img-border-radius img-thumbnail w-50 m-3" alt="Celebrity photo" title="Celebrity photo">
                             <p class="fw-bold">{{$celebrityInfo['firstname']}} {{$celebrityInfo['lastname']}}</p>
-                            <p>{{$celebrityInfo['description']}}</p>
+                            <p class="text-start">{{$celebrityInfo['description']}}</p>
                         </div>
                     @else 
                         <h2 class="fw-bold">Click on a celebrity to display details</p>

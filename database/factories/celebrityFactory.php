@@ -28,7 +28,7 @@ class celebrityFactory extends Factory
         return [
             'firstname' => $this->faker->firstname,
             'lastname' => $this->faker->lastname,
-            'description' => $this->faker->text(300), // text with 300 words
+            'description' => $this->faker->text(500), // text with 500 words
             'image' => $this->faker->imageUrl(360, 360, 'animals', true, 'cats'),
             'created_at' => now()
         ];

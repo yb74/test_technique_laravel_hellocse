@@ -1,5 +1,19 @@
-const manageDeleteMessage = () => {
-    alert("The celebrity sheet has been deleted");
+const manageDeleteMessage = () => { // function that display a message when a record is deleted with success and remove it after 5 seconds
+    $('span.js-delete-msg').html('<div class="alert alert-danger alert-dismissible fade show text-center">"The celebrity sheet has been deleted."</div>');
+    setTimeout(() => {$('span.js-delete-msg').html(" ")}, 5000);
+    $(window).scrollTop(0);
+}
+
+const manageCreateMessage = () => { // function that display a message when a record is created with success and remove it after 5 seconds
+    $('span.js-delete-msg').html('<div class="alert alert-success alert-dismissible fade show text-center">"The celebrity sheet has been created."</div>');
+    setTimeout(() => {$('span.js-delete-msg').html(" ")}, 5000);
+    $(window).scrollTop(0);
+}
+
+const manageUpdateMessage = () => { // function that display a message when a record is updated with success and remove it after 5 seconds
+    $('span.js-delete-msg').html('<div class="alert alert-warning alert-dismissible fade show text-center">"The celebrity sheet has been updated."</div>');
+    setTimeout(() => {$('span.js-delete-msg').html(" ")}, 5000);
+    $(window).scrollTop(0);
 }
 
 // ############################### get the clicked celebrity sheet ################################# //
@@ -18,79 +32,16 @@ const getClickedCelebrity = (id) => {
         },
         success: response => {
             // $("#"+id).css("background-color", "lightgreen");
-            // manageDeleteMessage();
-            
-            // console.log(response);
 
             $('#displayDetails').html(response);
         },
         error : (request,error) => {
-           //  console.log("Request: %o", request.responseJSON);
             console.log("Request: %o", request);
         }
     });
 }
 
 // ############################### Create a celebrity sheet ################################# //
-
-// const handleCreateForm = function (e) {
-// const handleCreateForm = (e) => {
-//     e.preventDefault();
-
-//     const dataFromForm = new FormData(this);
-//     fetch(`celebrities`,
-//         {
-//             method: "POST",
-//             headers: new Headers({
-//                 Accept: "application/json"
-//             }),
-//             body: {
-//                 data: dataFromForm
-//             }
-//         }
-//     )
-//     .then((response) => {
-//         if (response.ok) {
-//             return response.json();
-//         } else {
-//             if (response.status === 403) {
-//                 console.log('API rate limit exceeded.');
-//                 throw new Error('API rate limit exceeded.');
-//             } else {
-//                 console.log('An error occurred.');
-//                 throw new Error('An error occurred.');
-//             }
-//         }
-//     })
-//     .then((responseJson) => {
-//         // Do something with the response
-//         console.log("Data = %o", responseJson);
-//         return responseJson;
-//     })
-//     .catch((error) => {
-//         console.log(error)
-//     });
-// }
-
-// document.querySelector("#createForm").addEventListener("submit", handleCreateForm);
-
-
-
-// const handleCreateForm = function (e) {
-//     e.preventDefault();
-
-//     const data = new FormData(this);
-
-//     axios
-//         .post(this.action, data)
-//         .then((res) => console.log(res))
-//         .catch((err) => console.log(err));
-// }
-
-// document.querySelector("#createForm").addEventListener("submit", handleCreateForm);
-
-
-
 
 const submitCelebritySheetBtn = $("#createCelebritySheet");
 
@@ -100,7 +51,6 @@ submitCelebritySheetBtn.click((e) => {
     let firstnameInputVal = $('input[name="firstname"]').val();
     let lastnameInputVal = $('input[name="lastname"]').val();
     let descriptionInputVal = $('input[name="description"]').val();
-    // let imageInputVal = $('input[name="image"]').val();
     let imageInputVal = $('input[name="image"]').get(0).files[0];
 
     console.log(imageInputVal);
@@ -111,23 +61,18 @@ submitCelebritySheetBtn.click((e) => {
         && imageInputVal !== null && imageInputVal !== "" && imageInputVal !== undefined
     ) {
         console.log($('#createForm'));
-        // let formData = new FormData($('#createForm')[0]);
         let formData = new FormData();
 
         formData.append('firstname', firstnameInputVal);
         formData.append('lastname', lastnameInputVal);
         formData.append('description', descriptionInputVal);
-        // formData.append('image', imageInputVal, 'photo.jpg');
         formData.append('image', imageInputVal);
 
         console.log(formData);
 
-        // let formDataStringified = JSON.stringify(formData);
-
         $.ajax({
             url: `celebrities`,
             type: 'POST',
-            dataType: "json",
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
@@ -135,14 +80,11 @@ submitCelebritySheetBtn.click((e) => {
             contentType: false,
             data: formData,
             success: response => {
-                // manageDeleteMessage();
                 console.log("Form data sent to php");
-
-                // location.reload()
-                //  $("#celebrity_name_wrapper").html(`<h3 class="m-0 celebrity-h3 d-flex p-2" style="border:1px solid black"> <button onclick="getClickedCelebrity({{$celebrity->id}})" id="{{$celebrity->id}}" class="celebrities btn btn-link text-decoration-none text-dark w-100" name="{{$celebrity->id}}"> ${firstnameInputVal} ${lastnameInputVal} </button> <button onclick="deleteClickedCelebrity({{$celebrity->id}})" id="{{$celebrity->id}}" class="btn btn-danger">Delete</button> </h3>`);
+                location.reload();
+                manageCreateMessage();
             },
             error : (request,error) => {
-            //  console.log("Request: %o", request.responseJSON);
                 console.log("Request: %o", request);
             }
         });
@@ -163,7 +105,7 @@ const updateClickedCelebrity = (id) => {
         let firstnameUpdateInputVal = $('input[name="firstname_update"]').val();
         let lastnameUpdateInputVal = $('input[name="lastname_update"]').val();
         let descriptionUpdateInputVal = $('input[name="description_update"]').val();
-        let imageUpdateInputVal = $('input[name="image_update"]').get(0).files[0]; // check with undefined (not undefined)
+        let imageUpdateInputVal = $('input[name="image_update"]').get(0).files[0];
 
         console.log(imageUpdateInputVal);
 
@@ -177,14 +119,13 @@ const updateClickedCelebrity = (id) => {
             updateformData.append('firstname_update', firstnameUpdateInputVal);
             updateformData.append('lastname_update', lastnameUpdateInputVal);
             updateformData.append('description_update', descriptionUpdateInputVal);
-            updateformData.append('image_update', imageUpdateInputVal, 'photo.jpg');
+            updateformData.append('image_update', imageUpdateInputVal);
 
             console.log(updateformData);
 
             $.ajax({
                 url: `celebrities/update/${id}`,
                 type: 'POST',
-                dataType: "json",
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
@@ -192,16 +133,12 @@ const updateClickedCelebrity = (id) => {
                 contentType: false,
                 data: updateformData,
                 success: response => {
-                    // manageDeleteMessage();
                     console.log("Form data sent to php");
                     console.log("id to update = %o", id);
-                    
-                    location.reload();
-                    
-                    // $("#celebrity_name_wrapper").html(`<h3 class="m-0 celebrity-h3 d-flex p-2" style="border:1px solid black"> <button onclick="getClickedCelebrity({{$celebrity->id}})" id="{{$celebrity->id}}" class="celebrities btn btn-link text-decoration-none text-dark w-100" name="{{$celebrity->id}}"> ${firstnameInputVal} ${lastnameInputVal} </button> <button onclick="deleteClickedCelebrity({{$celebrity->id}})" id="{{$celebrity->id}}" class="btn btn-danger">Delete</button> </h3>`);
+                    location.reload();   
+                    manageUpdateMessage();               
                 },
                 error : (request,error) => {
-                //  console.log("Request: %o", request.responseJSON);
                     console.log("Request: %o", request);
                 }
             });
@@ -212,7 +149,7 @@ const updateClickedCelebrity = (id) => {
 }
 
 // ############################### delete a celebrity sheet ################################# //
-const deleteClickedCelebrity = (id) => { // Function that handle through ajax the removal of one invoice by sending its ID to the backkend with the button located at the rigth of each invoice line
+const deleteClickedCelebrity = (id) => { // Function that handle through ajax the removal of one element by sending its ID to the backkend
     if (confirm("Voulez vous vraiment supprimer cet élément ?")) { // alert that asks for confirmation before deliting a record
       $.ajax({
         url: `celebrities/delete/${id}`,
@@ -224,12 +161,10 @@ const deleteClickedCelebrity = (id) => { // Function that handle through ajax th
             _token: $("input[name=_token]").val()
         },
         success: response => {
-            // $("#"+id).remove();
             $("#"+id).closest('.celebrity-h3').remove();
             manageDeleteMessage();
         },
         error : (request,error) => {
-            //  console.log("Request: %o", request.responseJSON);
              console.log("Request: %o", request);
          }
         });

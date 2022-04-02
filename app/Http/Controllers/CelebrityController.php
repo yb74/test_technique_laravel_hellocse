@@ -75,13 +75,13 @@ class CelebrityController extends Controller
         $celebrity->firstname = $request->firstname;
         $celebrity->lastname = $request->lastname;
         $celebrity->description = $request->description;
-        $celebrity->image = $pathFile;
+        $celebrity->image = $imageName;
 
         $celebrity->save();
 
-        return response()->json([
-            'pathFile' => $pathFile,
-        ]);
+        // return response()->json([
+        //     'pathFile' => $pathFile,
+        // ]);
     }
 
     /**
@@ -101,18 +101,21 @@ class CelebrityController extends Controller
             'image_update' => 'required|image',
         ]);
 
-        $pathFile = $request->file('image_update')->store('public/upload');
+        $imageUpdateSize = $request->file('image_update')->getSize();
+        $imageUpdateName = $request->file('image_update')->getClientOriginalName();
+
+        $pathFile = $request->file('image_update')->storeAs('public/upload/', $imageUpdateName);
  
         $celebrity->firstname = $request->firstname_update;
         $celebrity->lastname = $request->lastname_update;
         $celebrity->description = $request->description_update;
-        $celebrity->image = $request->image_update;
+        $celebrity->image = $imageUpdateName;
 
         $celebrity->save();
 
-        return response()->json([
-            'pathFile' => $pathFile
-        ]);
+        // return response()->json([
+        //     'pathFile' => $pathFile
+        // ]);
     }
 
      /**
