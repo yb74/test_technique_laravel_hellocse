@@ -39,6 +39,7 @@ const getClickedCelebrity = (id) => {
             console.log("Request: %o", request);
         }
     });
+    $(window).scrollTop(0);
 }
 
 // ############################### Create a celebrity sheet ################################# //
@@ -55,10 +56,10 @@ submitCelebritySheetBtn.click((e) => {
 
     console.log(imageInputVal);
 
-    if (firstnameInputVal !== null && firstnameInputVal !== "" 
-        && lastnameInputVal !== null && lastnameInputVal !== "" 
-        && descriptionInputVal !== null && descriptionInputVal !== ""
-        && imageInputVal !== null && imageInputVal !== "" && imageInputVal !== undefined
+    if (firstnameInputVal !== null || firstnameInputVal !== "" 
+        || lastnameInputVal !== null || lastnameInputVal !== "" 
+        || descriptionInputVal !== null || descriptionInputVal !== ""
+        || imageInputVal !== null || imageInputVal !== "" || imageInputVal !== undefined
     ) {
         console.log($('#createForm'));
         let formData = new FormData();
@@ -109,10 +110,10 @@ const updateClickedCelebrity = (id) => {
 
         console.log(imageUpdateInputVal);
 
-        if (firstnameUpdateInputVal !== null && firstnameUpdateInputVal != "" 
-            && lastnameUpdateInputVal !== null && lastnameUpdateInputVal != "" 
-            && descriptionUpdateInputVal !== null && descriptionUpdateInputVal != ""
-            && imageUpdateInputVal !== null && imageUpdateInputVal != "" && imageUpdateInputVal != undefined
+        if (firstnameUpdateInputVal !== null || firstnameUpdateInputVal != "" 
+            || lastnameUpdateInputVal !== null || lastnameUpdateInputVal != "" 
+            || descriptionUpdateInputVal !== null || descriptionUpdateInputVal != ""
+            || imageUpdateInputVal !== null || imageUpdateInputVal != "" && imageUpdateInputVal != undefined
         ) {
             let updateformData = new FormData();
 
