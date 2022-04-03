@@ -56,11 +56,13 @@ submitCelebritySheetBtn.click((e) => {
 
     console.log(imageInputVal);
 
-    if (firstnameInputVal !== null || firstnameInputVal !== "" 
-        || lastnameInputVal !== null || lastnameInputVal !== "" 
-        || descriptionInputVal !== null || descriptionInputVal !== ""
-        || imageInputVal !== null || imageInputVal !== "" || imageInputVal !== undefined
+    if (firstnameInputVal === null || firstnameInputVal === "" 
+        || lastnameInputVal === null || lastnameInputVal === "" 
+        || descriptionInputVal === null || descriptionInputVal === ""
+        || imageInputVal === null || imageInputVal === "" || imageInputVal === undefined
     ) {
+        alert("please, fill all the fields");
+    } else {
         console.log($('#createForm'));
         let formData = new FormData();
 
@@ -89,8 +91,6 @@ submitCelebritySheetBtn.click((e) => {
                 console.log("Request: %o", request);
             }
         });
-    } else {
-        alert("please, fill all the fields");
     }
 });
 
@@ -110,11 +110,13 @@ const updateClickedCelebrity = (id) => {
 
         console.log(imageUpdateInputVal);
 
-        if (firstnameUpdateInputVal !== null || firstnameUpdateInputVal != "" 
-            || lastnameUpdateInputVal !== null || lastnameUpdateInputVal != "" 
-            || descriptionUpdateInputVal !== null || descriptionUpdateInputVal != ""
-            || imageUpdateInputVal !== null || imageUpdateInputVal != "" && imageUpdateInputVal != undefined
+        if (firstnameUpdateInputVal === null || firstnameUpdateInputVal === "" 
+            || lastnameUpdateInputVal === null || lastnameUpdateInputVal === "" 
+            || descriptionUpdateInputVal === null || descriptionUpdateInputVal === ""
+            || imageUpdateInputVal === null || imageUpdateInputVal === "" || imageUpdateInputVal === undefined
         ) {
+            alert("please, fill all the fields");
+        } else {
             let updateformData = new FormData();
 
             updateformData.append('firstname_update', firstnameUpdateInputVal);
@@ -143,8 +145,6 @@ const updateClickedCelebrity = (id) => {
                     console.log("Request: %o", request);
                 }
             });
-        } else {
-            alert("please, fill all the fields");
         } 
     });
 }
